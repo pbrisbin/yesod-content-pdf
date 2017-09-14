@@ -84,7 +84,7 @@ wkhtmltopdf opts setupInput =
     hClose tempOutputHandle
     setupInput $ \inputArg -> do
       let args = toArgs opts ++ [inputArg, tempOutputFp]
-      _ <- readCreateProcess (proc "wkhtmltopdf" args) ""
+      _ <- readCreateProcessWithExitCode (proc "wkhtmltopdf" args) ""
       PDF <$> Data.ByteString.readFile tempOutputFp
 
 -- | Options passed to wkhtmltopdf.  Please use the 'def' value
